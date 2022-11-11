@@ -13,10 +13,12 @@ export class DetailComponent implements OnInit {
 
  // bread crumb items
  breadCrumbItems: Array<{}>;
+  commande: any;
 
  constructor() { }
 
  ngOnInit() {
    this.breadCrumbItems = [{ label: 'Invoices' }, { label: 'Detail', active: true }];
+   this.commande = JSON.parse(localStorage.getItem('commande')!)
  }
 }

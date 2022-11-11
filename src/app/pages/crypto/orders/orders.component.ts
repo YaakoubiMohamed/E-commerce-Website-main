@@ -8,6 +8,8 @@ import { OrderSortableService, SortEvent } from './orders-sortable.directive'
 import { OrderService } from './orders.service'
 import { Orders } from './orders.model'
 import { ordersData } from './data'
+import { CommandesService } from '../../../core/services/commandes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
@@ -26,9 +28,11 @@ export class OrdersComponent implements OnInit {
   total$: Observable<number>;
   model: NgbDateStruct;
   @ViewChildren(OrderSortableService) headers: QueryList<OrderSortableService>;
+  user: any;
+  commandes:any[]=[];
 
-  constructor(public service: OrderService) {
-    this.orders$ = service.orders$;
+  constructor(public service: OrderService, private cmdService: CommandesService, private router: Router) {
+    // this.orders$ = service.orders$;
     this.total$ = service.total$;
   }
 
@@ -36,6 +40,39 @@ export class OrdersComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Crypto' }, { label: 'Orders', active: true }];
 
     this.ordersData = ordersData;
+    this.user = JSON.parse(localStorage.getItem('userInfo'));
+    this.getCommandes(this.user.id)
+  }
+
+  getCommandes(id: string){
+    console.log(id);
+
+    this.cmdService.getCommandes(id).subscribe(data =>{
+      // console.log(data)
+      this.commandes = data.map(fav=>{
+        // console.log(fav);
+        return {
+
+          uid: fav.payload.doc.id,
+
+          ...fav.payload.doc.data() as {}
+        }
+      })
+      // this.orders$ = this.commandes
+      console.log(this.commandes);
+
+    })
+  }
+
+  update(commande:any, etat:string){
+    let cmd = commande;
+    cmd.etat = etat
+    this.cmdService.updateCommande(cmd,cmd.uid)
+  }
+
+  detail(table){
+    localStorage.setItem('commande',JSON.stringify(table));
+    this.router.navigate(['invoices/detail'])
   }
 
   /**
@@ -44,7 +81,7 @@ export class OrdersComponent implements OnInit {
   *
   */
   onSort({ column, direction }: SortEvent) {
-  
+
     // resetting other headers
     this.headers.forEach(header => {
       if (header.sortable !== column) {

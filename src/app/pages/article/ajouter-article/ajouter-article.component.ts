@@ -35,10 +35,10 @@ export class AjouterArticleComponent implements OnInit {
       quantity: ['', Validators.required],
       description: ['', Validators.required],
       marque: ['', Validators.required],
-      image: ['', Validators.required],
+      image: [''],
       id_category: ['', Validators.required],
       id_sous_category: ['', Validators.required],
-      id_utilisateur: [this.user.uid]
+      vendeur: [this.user]
     });
     // this.getSousCategory()
     this.getCategory()

@@ -21,16 +21,16 @@
             <div class="col-6">
               <address>
                 <strong>Billed To:</strong><br>
-                John Smith<br>
+                {{commande.vendeur.nom}} {{commande.vendeur.prenom}}<br>
                 1234 Main<br>
                 Apt. 4B<br>
-                Springfield, ST 54321
+                {{commande.vendeur.adresse}}
               </address>
             </div>
             <div class="col-6 text-sm-end">
               <address>
                 <strong>Shipped To:</strong><br>
-                Kenny Rigdon<br>
+                {{commande.client.nom}}<br>
                 1234 Main<br>
                 Apt. 4B<br>
                 Springfield, ST 54321
@@ -48,7 +48,7 @@
             <div class="col-6 mt-3 text-sm-end">
               <address>
                 <strong>Order Date:</strong><br>
-                October 16, 2019<br><br>
+                {{commande.date | date:'medium'}}<br><br>
               </address>
             </div>
           </div>

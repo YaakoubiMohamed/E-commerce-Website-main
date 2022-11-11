@@ -15,9 +15,13 @@ export class CommandesService {
 
   }
 
-  getCommandes() {
+  getCommandes(id) {
 
-    return this.userRef;
+    return this.db.collection('commandes', (ref) => ref.where("article.id_utilisateur", "==", id)).snapshotChanges();
 
+  }
+
+  updateCommande(commande:any, id:string){
+    return this.db.collection('commandes').doc(id).update(commande);
   }
 }

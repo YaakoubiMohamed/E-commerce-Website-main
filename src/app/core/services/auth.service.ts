@@ -17,8 +17,8 @@ export class AuthenticationService {
         afAuth.authState.subscribe(user =>{
             if(user){
                 localStorage.setItem('user', JSON.stringify(user))
-                console.log(JSON.stringify(user)!)
-                console.log(user);
+                // console.log(JSON.stringify(user)!)
+                // console.log(user);
                 // localStorage.setItem('nom', 'ahmed')
             }
             else {

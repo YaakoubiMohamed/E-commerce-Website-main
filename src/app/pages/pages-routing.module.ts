@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'categories', loadChildren: () => import('./category/category.module').then(m => m.CategoryModule) },
   { path: 'sous-categories', loadChildren: () => import('./sous-category/sous-category.module').then(m => m.SousCategoryModule) },
   { path: 'articles', loadChildren: () => import('./article/article.module').then(m => m.ArticleModule) },
+  { path: 'invoices', loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesModule) },
 
 ];
 
