@@ -32,8 +32,8 @@ export class AuthenticationService {
       // console.log("a")
       // const nom = localStorage.getItem('nom');
       const user = JSON.parse(localStorage.getItem('user')!);
-      console.log(localStorage.setItem('user', JSON.stringify(user)))
-      console.log(user);
+      // console.log(localStorage.setItem('user', JSON.stringify(user)))
+      // console.log(user);
       if(user)
         return true
       else
@@ -49,7 +49,7 @@ export class AuthenticationService {
     }
 
     setUser(uid){
-        console.log(uid);
+        // console.log(uid);
         return this.db.collection('users').doc(uid).get().subscribe((doc)=>{
             console.log(doc.data());
             // let user:any;
